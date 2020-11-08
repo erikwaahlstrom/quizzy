@@ -50,13 +50,13 @@ export const QuizContainer = () => {
   // Counter
   const [counter, setCounter] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(
-      () => setCounter((counter) => counter + 1),
-      1000
-    );
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(
+  //     () => setCounter((counter) => counter + 1),
+  //     1000
+  //   );
+  //   return () => clearInterval(interval);
+  // }, []);
 
   // Event handlers
   const handleAnswerOptionClick = (isCorrect) => {
@@ -65,7 +65,7 @@ export const QuizContainer = () => {
     }
 
     const nextQuestion = currentQuestion + 1;
-    nextQuestion < questions.length
+    nextQuestion < newArray.length
       ? setCurrentQuestion(nextQuestion)
       : setShowScore(true);
   };
@@ -74,7 +74,19 @@ export const QuizContainer = () => {
     setCounter(0);
   };
 
-  const randomIndex = Math.floor(Math.random() * currentQuestion);
+  const arrayShuffle = function (arr) {
+    let newPos, temp;
+    for (let i = arr.length - 1; i > 0; i--) {
+      newPos = Math.floor(Math.random() * i + 1);
+      temp = arr[i];
+      arr[i] = arr[newPos];
+      arr[newPos] = temp;
+    }
+    return arr;
+  };
+
+  const newArray = arrayShuffle(questions);
+  console.log(newArray);
 
   return (
     <Wrapper>
@@ -82,18 +94,18 @@ export const QuizContainer = () => {
       <CounterComponent counter={counter} />
       {showScore ? (
         <p>
-          You scored {score} out of {questions.length}
+          You scored {score} out of {newArray.length}
         </p>
       ) : (
         <>
           <p>
-            Question {currentQuestion + 1}/{questions.length}
+            Question {currentQuestion + 1}/{newArray.length}
           </p>
 
-          <p>{questions[currentQuestion].questionText}</p>
+          <p>{newArray[currentQuestion].questionText}</p>
 
           <OptionsWrapper>
-            {questions[currentQuestion].answerOptions.map(
+            {newArray[currentQuestion].answerOptions.map(
               (answerOption, index) => (
                 <Option key={index}>
                   <button
