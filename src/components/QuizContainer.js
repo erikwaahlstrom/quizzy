@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+// Components
+import { CounterComponent } from "../components";
+// Elements
 import { HeaderOne, Wrapper, OptionsWrapper, Option } from "../elements";
 
 export const QuizContainer = () => {
@@ -71,10 +74,12 @@ export const QuizContainer = () => {
     setCounter(0);
   };
 
+  const randomIndex = Math.floor(Math.random() * currentQuestion);
+
   return (
     <Wrapper>
       <HeaderOne>QuizContainer</HeaderOne>
-      <p>Counter {counter}</p>
+      <CounterComponent counter={counter} />
       {showScore ? (
         <p>
           You scored {score} out of {questions.length}
