@@ -1,10 +1,10 @@
 import React from "react";
-import { HeaderOne } from "./elements";
+import { QuizContainer } from "./components";
 
 const App = () => {
   return (
     <>
-      <HeaderOne>Hej</HeaderOne>
+      <QuizContainer />
     </>
   );
 };
