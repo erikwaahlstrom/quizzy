@@ -65,7 +65,7 @@ export const QuizContainer = () => {
   const [score, setScore] = useState(0);
   const [unanswered, setUnanswered] = useState(0);
   // Counter
-  const [counter, setCounter] = useState(3);
+  const [counter, setCounter] = useState(5);
   // Timer
   const [timeup, setTimeup] = useState(false);
   // Lifelines
@@ -98,21 +98,18 @@ export const QuizContainer = () => {
     nextQuestion < newArray.length
       ? setCurrentQuestion(nextQuestion)
       : setShowScore(true);
-    setCounter(3);
+    setCounter(5);
     setTimeup(false);
   };
 
   const nextQuestion = () => {
     console.log(unanswered);
     handleAnswerOptionClick();
-    setCounter(3);
+    setCounter(5);
   };
 
   const spliceWrongAnswers = (questionToSplice) => {
-    const optionsArray = questionToSplice.answerOptions.map((item) => {
-      return item;
-    });
-    const filteredOptions = optionsArray.filter(
+    const filteredOptions = questionToSplice.answerOptions.filter(
       (item) => item.isCorrect === false
     );
     questionToSplice.answerOptions.splice(filteredOptions, 2);
