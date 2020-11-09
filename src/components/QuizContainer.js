@@ -125,29 +125,32 @@ export const QuizContainer = () => {
               <button onClick={nextQuestion}>Next</button>
             </>
           ) : (
-            <CounterComponent counter={counter} />
+            <>
+              <CounterComponent counter={counter} />
+
+              <p>
+                Question {currentQuestion + 1}/{newArray.length}
+              </p>
+
+              <p>{newArray[currentQuestion].questionText}</p>
+
+              <OptionsWrapper>
+                {newArray[currentQuestion].answerOptions.map(
+                  (answerOption, index) => (
+                    <Option key={index}>
+                      <button
+                        onClick={() =>
+                          handleAnswerOptionClick(answerOption.isCorrect)
+                        }
+                      >
+                        {answerOption.option}
+                      </button>
+                    </Option>
+                  )
+                )}
+              </OptionsWrapper>
+            </>
           )}
-          <p>
-            Question {currentQuestion + 1}/{newArray.length}
-          </p>
-
-          <p>{newArray[currentQuestion].questionText}</p>
-
-          <OptionsWrapper>
-            {newArray[currentQuestion].answerOptions.map(
-              (answerOption, index) => (
-                <Option key={index}>
-                  <button
-                    onClick={() =>
-                      handleAnswerOptionClick(answerOption.isCorrect)
-                    }
-                  >
-                    {answerOption.option}
-                  </button>
-                </Option>
-              )
-            )}
-          </OptionsWrapper>
         </>
       )}
     </Wrapper>
