@@ -69,7 +69,9 @@ export const QuizContainer = () => {
   // Timer
   const [timeup, setTimeup] = useState(false);
   // Lifelines
-  const [lifeline, setLifeLine] = useState(true);
+  const [lifeline, setLifeLine] = useState(1);
+  // Show answers
+  const [hidden, setHidden] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -103,17 +105,57 @@ export const QuizContainer = () => {
   };
 
   const nextQuestion = () => {
-    console.log(unanswered);
     handleAnswerOptionClick();
     setCounter(5);
   };
 
-  const spliceWrongAnswers = (questionToSplice) => {
-    const filteredOptions = questionToSplice.answerOptions.filter(
-      (item) => item.isCorrect === false
-    );
-    questionToSplice.answerOptions.splice(filteredOptions, 2);
-    setLifeLine(false);
+  const spliceWrongAnswers = (toSplice) => {
+    const options = toSplice.answerOptions;
+    const randomNumbers = [];
+    let indexOfAnswer;
+
+    options.forEach((option, index) => {
+      if (option.isCorrect) {
+        indexOfAnswer = index;
+      }
+    });
+
+    let count = 0;
+    do {
+      const randomNumber = Math.round(Math.random() * 3);
+      if (randomNumber !== indexOfAnswer) {
+        if (
+          randomNumbers.length < 2 &&
+          !randomNumbers.includes(randomNumber) &&
+          !randomNumbers.includes(indexOfAnswer)
+        ) {
+          randomNumbers.push(randomNumber);
+          count++;
+        } else {
+          while (true) {
+            const newRandomNumber = Math.round(Math.random() * 3);
+            if (
+              !randomNumbers.includes(newRandomNumber) &&
+              newRandomNumber !== indexOfAnswer
+            ) {
+              randomNumbers.push(newRandomNumber);
+              count++;
+              break;
+            }
+          }
+        }
+      }
+    } while (count < 2);
+
+    const removeOptions = [];
+    options.forEach((option, index) => {
+      if (randomNumbers.includes(index)) {
+        removeOptions.push(option);
+        setHidden(removeOptions);
+      }
+    });
+
+    setLifeLine(lifeline - 1);
   };
 
   return (
@@ -152,7 +194,15 @@ export const QuizContainer = () => {
               <OptionsWrapper>
                 {newArray[currentQuestion].answerOptions.map(
                   (answerOption, index) => (
-                    <Option key={index}>
+                    <Option
+                      key={index}
+                      hidden={hidden.includes(answerOption) ? false : true}
+                      // style={{
+                      //   border: hidden.includes(answerOption)
+                      //     ? "1px solid red"
+                      //     : "1px solid blue",
+                      // }}
+                    >
                       <button
                         onClick={() =>
                           handleAnswerOptionClick(answerOption.isCorrect)
