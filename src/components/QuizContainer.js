@@ -55,7 +55,6 @@ const arrayShuffle = function (arr) {
 };
 
 const newArray = arrayShuffle(questions);
-console.log(newArray);
 
 ////////////////////////////////////////////////////////////
 ////////// QuizContainer Component /////////////////////////
@@ -64,27 +63,37 @@ export const QuizContainer = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
+  // const [unanswered, setUnanswered] = useState(0);
   // Counter
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(3);
+  // Timer
+  const [timeup, setTimeup] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(
-      () => setCounter((counter) => counter + 1),
-      1000
-    );
+    const interval = setInterval(() => {
+      if (counter <= 1) {
+        clearInterval(interval);
+        setTimeup(true);
+      } else {
+        setCounter((counter) => counter - 1);
+      }
+    }, 1000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [counter]);
 
   // Event handlers
+
   const handleAnswerOptionClick = (isCorrect) => {
     if (isCorrect) {
       setScore(score + 1);
     }
-
     const nextQuestion = currentQuestion + 1;
     nextQuestion < newArray.length
       ? setCurrentQuestion(nextQuestion)
       : setShowScore(true);
+    setCounter(3);
+    setTimeup(false);
   };
 
   const nextQuestion = () => {
@@ -94,13 +103,21 @@ export const QuizContainer = () => {
   return (
     <Wrapper>
       <HeaderOne>QuizContainer</HeaderOne>
-      <CounterComponent counter={counter} />
+
       {showScore ? (
         <p>
           You scored {score} out of {newArray.length}
         </p>
       ) : (
         <>
+          {timeup ? (
+            <>
+              <h1>Time is up</h1>
+              <button onClick={nextQuestion}>Next</button>
+            </>
+          ) : (
+            <CounterComponent counter={counter} />
+          )}
           <p>
             Question {currentQuestion + 1}/{newArray.length}
           </p>
