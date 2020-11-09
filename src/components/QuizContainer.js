@@ -68,6 +68,8 @@ export const QuizContainer = () => {
   const [counter, setCounter] = useState(3);
   // Timer
   const [timeup, setTimeup] = useState(false);
+  // Lifelines
+  const [lifeline, setLifeLine] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -106,9 +108,25 @@ export const QuizContainer = () => {
     setCounter(3);
   };
 
+  const spliceWrongAnswers = (questionToSplice) => {
+    const optionsArray = questionToSplice.answerOptions.map((item) => {
+      return item;
+    });
+    const filteredOptions = optionsArray.filter(
+      (item) => item.isCorrect === false
+    );
+    questionToSplice.answerOptions.splice(filteredOptions, 2);
+    setLifeLine(false);
+  };
+
   return (
     <Wrapper>
       <HeaderOne>QuizContainer</HeaderOne>
+      {lifeline && !timeup ? (
+        <button onClick={() => spliceWrongAnswers(newArray[currentQuestion])}>
+          Lifeline 50/50
+        </button>
+      ) : null}
 
       {showScore ? (
         <>
