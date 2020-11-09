@@ -63,7 +63,7 @@ export const QuizContainer = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
-  // const [unanswered, setUnanswered] = useState(0);
+  const [unanswered, setUnanswered] = useState(0);
   // Counter
   const [counter, setCounter] = useState(3);
   // Timer
@@ -88,6 +88,10 @@ export const QuizContainer = () => {
     if (isCorrect) {
       setScore(score + 1);
     }
+    if (isCorrect === undefined) {
+      setUnanswered(unanswered + 1);
+    }
+
     const nextQuestion = currentQuestion + 1;
     nextQuestion < newArray.length
       ? setCurrentQuestion(nextQuestion)
@@ -97,7 +101,9 @@ export const QuizContainer = () => {
   };
 
   const nextQuestion = () => {
-    setCounter(0);
+    console.log(unanswered);
+    handleAnswerOptionClick();
+    setCounter(3);
   };
 
   return (
@@ -105,9 +111,12 @@ export const QuizContainer = () => {
       <HeaderOne>QuizContainer</HeaderOne>
 
       {showScore ? (
-        <p>
-          You scored {score} out of {newArray.length}
-        </p>
+        <>
+          <p>
+            You scored {score} out of {newArray.length}
+          </p>
+          <p>Number of unanswered questions: {unanswered}</p>
+        </>
       ) : (
         <>
           {timeup ? (
@@ -139,7 +148,6 @@ export const QuizContainer = () => {
               )
             )}
           </OptionsWrapper>
-          <button onClick={nextQuestion}>Skip</button>
         </>
       )}
     </Wrapper>
