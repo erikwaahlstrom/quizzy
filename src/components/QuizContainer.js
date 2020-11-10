@@ -155,7 +155,7 @@ export const QuizContainer = () => {
           {timeup ? (
             <>
               <h1>Time is up</h1>
-              <Button onClick={nextQuestion}>Next</Button>
+              <Button onClick={nextQuestion}>Next question</Button>
             </>
           ) : (
             <>

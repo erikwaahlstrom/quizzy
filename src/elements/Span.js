@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Span = styled.span`
-  color: #f67280;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #165ba9;
 `;
