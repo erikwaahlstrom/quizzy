@@ -1,0 +1,38 @@
+[
+  {
+    "questionText": "What is the capital of France?",
+    "answerOptions": [
+      { "option": "New York", "isCorrect": false },
+      { "option": "London", "isCorrect": false },
+      { "option": "Paris", "isCorrect": true },
+      { "option": "Dublin", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "Who is CEO of Tesla?",
+    "answerOptions": [
+      { "option": "Jeff Bezos", "isCorrect": false },
+      { "option": "Elon Musk", "isCorrect": true },
+      { "option": "Bill Gates", "isCorrect": false },
+      { "option": "Tony Stark", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "The iPhone was created by which company?",
+    "answerOptions": [
+      { "option": "Apple", "isCorrect": true },
+      { "option": "Intel", "isCorrect": false },
+      { "option": "Amazon", "isCorrect": false },
+      { "option": "Microsoft", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "How many Harry Potter books are there?",
+    "answerOptions": [
+      { "option": "1", "isCorrect": false },
+      { "option": "4", "isCorrect": false },
+      { "option": "6", "isCorrect": false },
+      { "option": "7", "isCorrect": true }
+    ]
+  }
+]

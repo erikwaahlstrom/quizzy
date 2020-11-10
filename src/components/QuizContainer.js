@@ -3,45 +3,8 @@ import React, { useState, useEffect } from "react";
 import { CounterComponent } from "../components";
 // Elements
 import { HeaderOne, Wrapper, OptionsWrapper, Option } from "../elements";
-
-const questions = [
-  {
-    questionText: "What is the capital of France?",
-    answerOptions: [
-      { option: "New York", isCorrect: false },
-      { option: "London", isCorrect: false },
-      { option: "Paris", isCorrect: true },
-      { option: "Dublin", isCorrect: false },
-    ],
-  },
-  {
-    questionText: "Who is CEO of Tesla?",
-    answerOptions: [
-      { option: "Jeff Bezos", isCorrect: false },
-      { option: "Elon Musk", isCorrect: true },
-      { option: "Bill Gates", isCorrect: false },
-      { option: "Tony Stark", isCorrect: false },
-    ],
-  },
-  {
-    questionText: "The iPhone was created by which company?",
-    answerOptions: [
-      { option: "Apple", isCorrect: true },
-      { option: "Intel", isCorrect: false },
-      { option: "Amazon", isCorrect: false },
-      { option: "Microsoft", isCorrect: false },
-    ],
-  },
-  {
-    questionText: "How many Harry Potter books are there?",
-    answerOptions: [
-      { option: "1", isCorrect: false },
-      { option: "4", isCorrect: false },
-      { option: "6", isCorrect: false },
-      { option: "7", isCorrect: true },
-    ],
-  },
-];
+// Questions
+import questions from "../data/questions.json";
 
 const arrayShuffle = function (arr) {
   let newPos, temp;
@@ -56,9 +19,6 @@ const arrayShuffle = function (arr) {
 
 const newArray = arrayShuffle(questions);
 
-////////////////////////////////////////////////////////////
-////////// QuizContainer Component /////////////////////////
-////////////////////////////////////////////////////////////
 export const QuizContainer = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
@@ -69,7 +29,8 @@ export const QuizContainer = () => {
   // Timer
   const [timeup, setTimeup] = useState(false);
   // Lifelines
-  const [lifeline, setLifeLine] = useState(1);
+  const [fifty, setFifty] = useState(true);
+  const [addtime, setAddTime] = useState(true);
   // Show answers
   const [hidden, setHidden] = useState([]);
 
@@ -155,15 +116,26 @@ export const QuizContainer = () => {
       }
     });
 
-    setLifeLine(lifeline - 1);
+    setFifty(false);
+  };
+
+  const addTime = () => {
+    setCounter(counter + 10);
+    setAddTime(false);
   };
 
   return (
     <Wrapper>
       <HeaderOne>QuizContainer</HeaderOne>
-      {lifeline && !timeup ? (
+      {fifty && !timeup ? (
         <button onClick={() => spliceWrongAnswers(newArray[currentQuestion])}>
           Lifeline 50/50
+        </button>
+      ) : null}
+
+      {addtime && !timeup ? (
+        <button onClick={() => addTime(newArray[currentQuestion])}>
+          Give me more time +10s
         </button>
       ) : null}
 
@@ -197,11 +169,6 @@ export const QuizContainer = () => {
                     <Option
                       key={index}
                       hidden={hidden.includes(answerOption) ? false : true}
-                      // style={{
-                      //   border: hidden.includes(answerOption)
-                      //     ? "1px solid red"
-                      //     : "1px solid blue",
-                      // }}
                     >
                       <button
                         onClick={() =>
