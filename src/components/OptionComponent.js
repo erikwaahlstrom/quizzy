@@ -1,7 +1,7 @@
 import React from "react";
 import { Option, Button } from "../elements";
 
-export const OptionComponent = ({
+const OptionComponent = ({
   index,
   hidden,
   answerOption,
@@ -10,10 +10,15 @@ export const OptionComponent = ({
   return (
     <>
       <Option key={index} hidden={hidden.includes(answerOption) ? false : true}>
-        <Button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>
+        <Button
+          data-testid="button"
+          onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
+        >
           {answerOption.option}
         </Button>
       </Option>
     </>
   );
 };
+
+export default OptionComponent;

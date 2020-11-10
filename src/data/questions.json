@@ -34,5 +34,62 @@
       { "option": "6", "isCorrect": false },
       { "option": "7", "isCorrect": true }
     ]
+  },
+  {
+    "questionText": "How many rings are on the Olympic flag?",
+    "answerOptions": [
+      { "option": "none", "isCorrect": false },
+      { "option": "4", "isCorrect": false },
+      { "option": "5", "isCorrect": true },
+      { "option": "7", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "What are the main colors on the flag of Spain?",
+    "answerOptions": [
+      { "option": "Black and yellow", "isCorrect": false },
+      { "option": "Red and yellow", "isCorrect": true },
+      { "option": "Green and white", "isCorrect": false },
+      { "option": "Blue and white", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "How did Spider-Man get his powers?",
+    "answerOptions": [
+      { "option": "Military experiment gone awry", "isCorrect": false },
+      { "option": "Born with them", "isCorrect": false },
+      { "option": "Bitten by a radioactive spider", "isCorrect": true },
+      {
+        "option": "Woke up with them after a strange dream",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "questionText": "What is the longest that an elephant has ever lived? (That we know of)",
+    "answerOptions": [
+      { "option": "86 years", "isCorrect": true },
+      { "option": "17 years", "isCorrect": false },
+      { "option": "49 years", "isCorrect": false },
+      { "option": "142 years", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "In darts, what's the most points you can score with a single throw?",
+    "answerOptions": [
+      { "option": "60", "isCorrect": true },
+      { "option": "20", "isCorrect": false },
+      { "option": "50", "isCorrect": false },
+      { "option": "100", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "What is a tarsier?",
+    "answerOptions": [
+      { "option": "A lizard", "isCorrect": false },
+      { "option": "A cat", "isCorrect": false },
+      { "option": "A bird", "isCorrect": false },
+      { "option": "A primate", "isCorrect": true }
+    ]
   }
 ]

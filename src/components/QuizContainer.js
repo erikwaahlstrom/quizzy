@@ -5,8 +5,8 @@ import {
   FiftyFifty,
   AddTime,
   ScoreBoard,
-  OptionComponent,
 } from "../components";
+import OptionComponent from "./OptionComponent";
 // Elements
 import { HeaderOne, Wrapper, OptionsWrapper, Button } from "../elements";
 // Questions
@@ -31,7 +31,7 @@ export const QuizContainer = () => {
   const [score, setScore] = useState(0);
   const [unanswered, setUnanswered] = useState(0);
   // Counter
-  const [counter, setCounter] = useState(5);
+  const [counter, setCounter] = useState(15);
   // Timer
   const [timeup, setTimeup] = useState(false);
   // Lifelines
@@ -66,13 +66,13 @@ export const QuizContainer = () => {
     nextQuestion < newArray.length
       ? setCurrentQuestion(nextQuestion)
       : setShowScore(true);
-    setCounter(5);
+    setCounter(15);
     setTimeup(false);
   };
 
   const nextQuestion = () => {
     handleAnswerOptionClick();
-    setCounter(5);
+    setCounter(15);
   };
 
   const spliceWrongAnswers = (toSplice) => {
