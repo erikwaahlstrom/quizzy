@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 // Components
-import { CounterComponent } from "../components";
+import {
+  CounterComponent,
+  FiftyFifty,
+  AddTime,
+  ScoreBoard,
+  OptionComponent,
+} from "../components";
 // Elements
-import { HeaderOne, Wrapper, OptionsWrapper, Option } from "../elements";
+import { HeaderOne, Wrapper, OptionsWrapper, Button } from "../elements";
 // Questions
 import questions from "../data/questions.json";
 
@@ -48,7 +54,6 @@ export const QuizContainer = () => {
   }, [counter]);
 
   // Event handlers
-
   const handleAnswerOptionClick = (isCorrect) => {
     if (isCorrect) {
       setScore(score + 1);
@@ -119,39 +124,37 @@ export const QuizContainer = () => {
     setFifty(false);
   };
 
-  const addTime = () => {
+  const handleAddTime = () => {
     setCounter(counter + 10);
     setAddTime(false);
   };
 
   return (
     <Wrapper>
-      <HeaderOne>QuizContainer</HeaderOne>
-      {fifty && !timeup ? (
-        <button onClick={() => spliceWrongAnswers(newArray[currentQuestion])}>
-          Lifeline 50/50
-        </button>
-      ) : null}
-
-      {addtime && !timeup ? (
-        <button onClick={() => addTime(newArray[currentQuestion])}>
-          Give me more time +10s
-        </button>
-      ) : null}
+      <HeaderOne>Quizzy</HeaderOne>
+      <FiftyFifty
+        spliceWrongAnswers={spliceWrongAnswers}
+        fifty={fifty}
+        timeup={timeup}
+        currentQuestion={currentQuestion}
+        newArray={newArray}
+      />
+      <AddTime
+        handleAddTime={handleAddTime}
+        addtime={addtime}
+        timeup={timeup}
+        currentQuestion={currentQuestion}
+        newArray={newArray}
+      />
 
       {showScore ? (
-        <>
-          <p>
-            You scored {score} out of {newArray.length}
-          </p>
-          <p>Number of unanswered questions: {unanswered}</p>
-        </>
+        <ScoreBoard score={score} newArray={newArray} unanswered={unanswered} />
       ) : (
         <>
           {timeup ? (
             <>
               <h1>Time is up</h1>
-              <button onClick={nextQuestion}>Next</button>
+              <Button onClick={nextQuestion}>Next</Button>
             </>
           ) : (
             <>
@@ -166,18 +169,13 @@ export const QuizContainer = () => {
               <OptionsWrapper>
                 {newArray[currentQuestion].answerOptions.map(
                   (answerOption, index) => (
-                    <Option
+                    <OptionComponent
                       key={index}
-                      hidden={hidden.includes(answerOption) ? false : true}
-                    >
-                      <button
-                        onClick={() =>
-                          handleAnswerOptionClick(answerOption.isCorrect)
-                        }
-                      >
-                        {answerOption.option}
-                      </button>
-                    </Option>
+                      index={index}
+                      hidden={hidden}
+                      answerOption={answerOption}
+                      handleAnswerOptionClick={handleAnswerOptionClick}
+                    />
                   )
                 )}
               </OptionsWrapper>
