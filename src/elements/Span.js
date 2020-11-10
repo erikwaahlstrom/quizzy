@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
 
-export const HeaderOne = styled.h1`
+export const Span = styled.span`
   color: #f67280;
 `;

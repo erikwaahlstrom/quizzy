@@ -132,6 +132,7 @@ export const QuizContainer = () => {
   return (
     <Wrapper>
       <HeaderOne>Quizzy</HeaderOne>
+      <hr />
       <FiftyFifty
         spliceWrongAnswers={spliceWrongAnswers}
         fifty={fifty}
@@ -160,9 +161,9 @@ export const QuizContainer = () => {
             <>
               <CounterComponent counter={counter} />
 
-              <p>
+              <h3>
                 Question {currentQuestion + 1}/{newArray.length}
-              </p>
+              </h3>
 
               <p>{newArray[currentQuestion].questionText}</p>
 

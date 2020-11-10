@@ -1,12 +1,16 @@
 import React from "react";
+import { Span } from "../elements";
 
 export const ScoreBoard = ({ newArray, score, unanswered }) => {
   return (
     <>
-      <p>
-        You scored {score} out of {newArray.length}
-      </p>
-      <p>Number of unanswered questions: {unanswered}</p>
+      <h3>
+        You answered the correct answer <Span>{score}</Span> times out of
+        <Span> {newArray.length}</Span>
+      </h3>
+      <h3>
+        Number of unanswered questions: <Span>{unanswered}</Span>
+      </h3>
     </>
   );
 };

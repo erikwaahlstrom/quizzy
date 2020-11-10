@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../elements";
 
 export const AddTime = ({
   handleAddTime,
@@ -10,9 +11,9 @@ export const AddTime = ({
   return (
     <>
       {addtime && !timeup ? (
-        <button onClick={() => handleAddTime(newArray[currentQuestion])}>
+        <Button small onClick={() => handleAddTime(newArray[currentQuestion])}>
           Give me more time +10s
-        </button>
+        </Button>
       ) : null}
     </>
   );

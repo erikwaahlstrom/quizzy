@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../elements";
 
 export const FiftyFifty = ({
   spliceWrongAnswers,
@@ -10,9 +11,12 @@ export const FiftyFifty = ({
   return (
     <>
       {fifty && !timeup ? (
-        <button onClick={() => spliceWrongAnswers(newArray[currentQuestion])}>
+        <Button
+          small
+          onClick={() => spliceWrongAnswers(newArray[currentQuestion])}
+        >
           Lifeline 50/50
-        </button>
+        </Button>
       ) : null}
     </>
   );

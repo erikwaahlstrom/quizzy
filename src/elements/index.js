@@ -3,3 +3,4 @@ export { Wrapper } from "./Wrapper";
 export { OptionsWrapper } from "./OptionsWrapper";
 export { Option } from "./Option";
 export { Button } from "./Button";
+export { Span } from "./Span";
